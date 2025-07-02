@@ -8,7 +8,7 @@ These instructions will get you a copy of the project on your local machine.
 
 ### Prerequisites
 
-This project was tested on Ubuntu 20.04 LTS (GNU/Linux 5.4.0-187-generic x86_64) with Python 3.8.10.
+This project was tested on Ubuntu 22.04 LTS (GNU/Linux 5.4.0-187-generic x86_64) with Python 3.8.10.
 
 In addition, the following libraries are needed:
 
