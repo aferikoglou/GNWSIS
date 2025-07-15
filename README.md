@@ -32,10 +32,10 @@ TODO: Add a command
 Output: Add expected output
 ```
 
-## Publications
+## Publication
 
 If you find our project useful, please consider citing our paper:
 
 ```bash
-TODO
+TODO: Add citation
 ```
