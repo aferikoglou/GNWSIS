@@ -74,14 +74,35 @@ Finished source code feature vector generation...
 
 ```
 
-Please note that this file contains source code feature vectors for a broader set of applications than those officially included in the GNΩSIS dataset. To ensure consistency with the dataset presented in the manuscript, we recommend using the `SourceCodeFeatureVectors.csv` located in the `data/` directory.
+> Please note that the generated `SourceCodeFeatureVectors.csv` file contains source code feature vectors for a broader set of applications than those officially included in the GNΩSIS dataset. To ensure consistency with the dataset presented in the manuscript, we recommend using the `SourceCodeFeatureVectors.csv` located in the `data/` directory.
 
-**Extract Data from SQLite to CSV**
+**Convert SQLite Data to CSV and Build the Final Dataset**
 
 ```bash
-TODO: Add a command
+python3.10 dataAggegator.py
 
-Output: Add expected output
+Output:
+
+Started database read...
+
+Finished database read...
+
+Aggregating CSV files and computing metrics...
+
+GNΩSIS dataset generated successfully at GNΩSIS.csv
+
+```
+
+> The exact CSV files referenced in the GNΩSIS manuscript are also available in the `data/` directory of this repository.
+
+**Visualize Key Insights for an Application from the GNΩSIS Dataset**
+
+```bash
+TODO
+
+Output:
+
+
 ```
 
 ## Publication

@@ -16,7 +16,9 @@ class DBReader:
         """
         self.DATASET_DIR = "./data/ApplicationDataset"
         self.DATABASE_DIR = "./data/ApplicationDatabases"
-        self.CSVS_DIR = "./data/CSVS"
+        self.CSVS_DIR = "./CSVS"
+
+        os.makedirs(self.CSVS_DIR, exist_ok = True)
         
         # List of application names to process
         self.APPLICATION_NAMES_LIST = [
