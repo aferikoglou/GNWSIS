@@ -12,49 +12,21 @@ It also includes a detailed schema of the dataset and utility scripts for visual
 
 ## Repository Structure
 
-├── data/
-│   ├── ApplicationAPLMapping/          
-│   │   # Provides the mapping between directive labels and their corresponding action points for each application.
-│
-│   ├── ApplicationDatabases/           
-│   │   # Includes the corresponding database files for each evaluated FPGA device and target clock frequency.
-│
-│   ├── ApplicationDataset/             
-│   │   # Provides the source code for each application, accompanied by the src_info.json and kernel_info.txt metadata files.
-│
-│   ├── CSVS/                           
-│   │   # Includes the extracted data from the corresponding SQLite databases.
-│
-│   ├── ApplicationBaselineInformation.csv    
-│   │   # Provides, for each application, the QoR metrics obtained from HLS reports generated without any applied directives or Vitis optimizations, across the evaluated FPGAs and target clock frequencies.
-│
-│   ├── ApplicationInformation.csv      
-│   │   # Offers a quick reference to the top-level function file for each application, including the function name and file extension.
-│
-│   └── SourceCodeFeatureVectors.csv    
-│       # Provides the source code feature vector representation for each application.
-│
-├── modules/                            
-│   # Includes the core components of the repository, structured as modular classes.
-│
-├── datasetGeneration.py                
-│   # Python script that generates the `SourceCodeFeatureVectors.csv` file containing the extracted source code features.
-│
-├── qorMetricsDirectivesAnalyzer.py     
-│   # Python script that creates the files in the `CSVS` directory and performs basic per-application analyses.
-│
-├── requirements.txt                    
-│   # Lists required Python packages to run the repository.
-│
-├── .gitignore                          
-│   # Specifies intentionally untracked files to ignore.
-│
-├── LICENSE.md                          
-│   # The license for this project.
-│
-└── README.md                           
-    # Project overview, documentation, and usage instructions.
-
+- `data/`
+  - `ApplicationAPLMapping/` Provides the mapping between directive labels and their corresponding action points for each application.
+  - `ApplicationDatabases/` Includes the corresponding database files for each evaluated FPGA device and target clock frequency.
+  - `ApplicationDataset/` Provides the source code for each application, accompanied by the `src_info.json` and `kernel_info.txt` metadata files.
+  - `CSVS/` Includes the extracted data from the corresponding SQLite databases.
+  - `ApplicationBaselineInformation.csv` Provides, for each application, the QoR metrics obtained from HLS reports generated without any applied directives or Vitis optimizations, across the evaluated FPGAs and target clock frequencies.
+  - `ApplicationInformation.csv` Offers a quick reference to the top-level function file for each application, including the function name and file extension.
+  - `SourceCodeFeatureVectors.csv` Provides the source code feature vector representation for each application.
+- `modules/` Includes the core components of the repository, structured as modular classes.
+- `datasetGeneration.py`Python script that generates the `SourceCodeFeatureVectors.csv` file containing the extracted source code features.
+- `qorMetricsDirectivesAnalyzer.py` Python script that creates the files in the `CSVS` directory and performs basic per-application analyses.
+- `requirements.txt` Lists required Python packages to run the repository.
+- `.gitignore` Specifies intentionally untracked files to ignore.
+- `LICENSE.md` The license for this project.
+- `README.md` Project overview, documentation, and usage instructions.
 
 ## Getting Started
 
