@@ -9,7 +9,7 @@ def generate_source_code_feature_vector(MODE):
     Generates the source code feature vector dataset for the specified mode.
 
     Args:
-        MODE (str): The mode in which the script runs, either 'CollectiveHLS' or 'HLSDataset'.
+        MODE (str): The mode in which the script runs, either 'CollectiveHLS' or 'GNWSIS'.
     
     Returns:
         pd.DataFrame: A DataFrame containing the feature vectors for each application.
@@ -69,7 +69,7 @@ def main():
     Main function to run the source code feature vector generation process.
     """
     parser = argparse.ArgumentParser(description='A script to generate the source code dataset.')
-    parser.add_argument('--MODE', type=str, required=True, choices=['CollectiveHLS', 'HLSDataset'], help='Mode to run the script')
+    parser.add_argument('--MODE', type=str, required=True, choices=['CollectiveHLS', 'GNWSIS'], help='Mode to run the script')
     args = parser.parse_args()
 
     MODE = args.MODE
@@ -79,7 +79,7 @@ def main():
     feature_vector_df = generate_source_code_feature_vector(MODE)
 
     # Save the dataset to a CSV file
-    save_feature_vector_to_csv(feature_vector_df, "./data/SourceCodeFeatureVectors.csv")
+    save_feature_vector_to_csv(feature_vector_df, "./SourceCodeFeatureVectors.csv")
 
     print("\nFinished source code feature vector generation...")
 

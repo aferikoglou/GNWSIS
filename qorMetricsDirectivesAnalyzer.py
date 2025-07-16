@@ -3,7 +3,6 @@ import argparse
 
 from modules.dbReader import DBReader
 from modules.applicationDataAnalyzer import ApplicationDataAnalyzer
-from modules.paretoDataAnalyzer import ParetoDataAnalyzer
 
 def str2bool(v):
     """
@@ -50,12 +49,6 @@ def main():
 
         print("\nFinished application data analyses...")
     
-    print("Started Pareto optimal data analyses...\n")
-    
-    pareto_data_analyzer = ParetoDataAnalyzer()
-    pareto_data_analyzer.analyze()
-        
-    print("\nFinished Pareto optimal data analyses...")
      
 if __name__ == "__main__":
     # Set up argument parsing
