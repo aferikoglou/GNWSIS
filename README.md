@@ -177,11 +177,7 @@ Finished Application Analysis
 
 ```
 
-The output of this step is stored in the `output/rofdinia-knn-1-tiling` directory, which contains synthesizability and feasibility statistics. Designs that are both synthesizable and feasible are filtered, and the Pareto frontier is generated for each FPGA device and target clock frequency. These results are further visualized, as illustrated in the following figures.
-
-![Synthesizability & Feasibility Statistics](./figures/synthesizability_feasibility_piecharts.pdf)
-![Quality of Result Metrics Distributions](./figures/quality_of_result_metrics_boxplots.pdf)
-![Pareto Frontiers](./figures/pareto_frontier_scatterplots.pdf)
+The output of this step is stored in the `output/rofdinia-knn-1-tiling` directory, which contains synthesizability and feasibility statistics. Designs that are both synthesizable and feasible are filtered, and the Pareto frontier is generated for each FPGA device and target clock frequency. These results are further visualized.
 
 ## Publication
 
