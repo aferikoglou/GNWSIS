@@ -22,7 +22,7 @@ It also includes a detailed schema of the dataset and utility scripts for visual
   - `SourceCodeFeatureVectors.csv` Provides the source code feature vector representation for each application.
 - `modules/` Includes the core components of the repository, structured as modular classes.
 - `datasetGeneration.py`Python script that generates the `SourceCodeFeatureVectors.csv` file containing the extracted source code features.
-- `qorMetricsDirectivesAnalyzer.py` Python script that creates the files in the `CSVS` directory and performs basic per-application analyses.
+- `dataAggregator.py` Python script that creates the files in the `CSVS` directory and generates the `GNΩSIS.csv`.
 - `requirements.txt` Lists required Python packages to run the repository.
 - `.gitignore` Specifies intentionally untracked files to ignore.
 - `LICENSE.md` The license for this project.
