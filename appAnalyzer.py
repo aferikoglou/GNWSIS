@@ -1,5 +1,8 @@
 import argparse
 import pandas as pd
+
+from datasets import load_dataset
+
 from modules.applicationDataAnalyzer import ApplicationDataAnalyzer
 
 def main():
@@ -22,7 +25,14 @@ def main():
     application_name = args.APPLICATION_NAME
 
     # Load the GNΩSIS dataset
-    df = pd.read_csv("GNΩSIS.csv")
+    # df = pd.read_csv("GNΩSIS.csv") if you generate it locally
+
+    gnwsis_dataset = load_dataset("aferikoglou/GNWSIS", split="train")
+
+    # Convert to pandas DataFrame
+    df = gnwsis_dataset.to_pandas()
+
+    # Display the first few rows
     print("Loaded GNΩSIS dataset:\n")
     print(df.shape)
     print(df.head())

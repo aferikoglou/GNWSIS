@@ -3,3 +3,4 @@ pandas==1.4.3
 seaborn==0.12.0
 matplotlib==3.5.3
 paretoset==1.2.3
+datasets==4.0.0

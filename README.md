@@ -44,6 +44,7 @@ In addition, the following libraries are needed:
 * [`seaborn`](https://pypi.org/project/seaborn/) (version 0.12.0)
 * [`matplotlib`](https://pypi.org/project/matplotlib/) (version 3.5.3)
 * [`paretoset`](https://pypi.org/project/paretoset/) (version 1.2.3)
+* [`datasets`](https://pypi.org/project/datasets/) (version 4.0.0)
 
 which can be simply installed using the following command.
 
@@ -130,8 +131,8 @@ These fields indicate which design directives have been applied to specific acti
 
 ---
 
-This schema enables thorough exploration of the design-performance trade-offs across multiple configurations and devices.
-
+This schema enables thorough exploration of the design-performance trade-offs across multiple configurations and devices. 
+The GNΩSIS dataset is also available on [**Hugging Face Datasets**](https://huggingface.co/datasets/aferikoglou/GNWSIS), enabling users to effortlessly download and utilize it directly.
 
 **Visualize Key Insights for an Application from the GNΩSIS Dataset**
 
