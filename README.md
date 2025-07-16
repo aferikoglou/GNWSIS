@@ -21,8 +21,9 @@ It also includes a detailed schema of the dataset and utility scripts for visual
   - `ApplicationInformation.csv` Offers a quick reference to the top-level function file for each application, including the function name and file extension.
   - `SourceCodeFeatureVectors.csv` Provides the source code feature vector representation for each application.
 - `modules/` Includes the core components of the repository, structured as modular classes.
-- `datasetGeneration.py`Python script that generates the `SourceCodeFeatureVectors.csv` file containing the extracted source code features.
+- `featureVectorGeneration.py` Python script that generates the `SourceCodeFeatureVectors.csv` file containing the extracted source code features.
 - `dataAggregator.py` Python script that creates the files in the `CSVS` directory and generates the `GNΩSIS.csv`.
+- `appAnalyzer.py` Python script that extracts key insights for a specific application from the dataset.
 - `requirements.txt` Lists required Python packages to run the repository.
 - `.gitignore` Specifies intentionally untracked files to ignore.
 - `LICENSE.md` The license for this project.
@@ -57,7 +58,7 @@ After downloading the software in the *Prerequisites* section you can clone this
 **Source Code Feature Vector Generation**
 
 ```bash
-python3.10 datasetGeneration.py --MODE GNWSIS
+python3.10 featureVectorGeneration.py --MODE GNWSIS
 
 Output:
 
@@ -79,7 +80,7 @@ Finished source code feature vector generation...
 **Convert SQLite Data to CSV and Build the Final Dataset**
 
 ```bash
-python3.10 dataAggegator.py
+python3.10 dataAggregator.py
 
 Output:
 
@@ -95,15 +96,93 @@ GNΩSIS dataset generated successfully at GNΩSIS.csv
 
 > The exact CSV files referenced in the GNΩSIS manuscript are also available in the `data/` directory of this repository.
 
+Certainly! Here's a professionally written **Markdown section** that explains the **dataset schema** clearly and concisely:
+
+---
+
+## Dataset Schema
+
+The GNΩSIS dataset is organized as a CSV file, where each row corresponds to a distinct hardware design configuration for a specific application, targeting a particular FPGA and clock frequency. It includes both configuration parameters and associated performance and resource utilization metrics.
+
+### Configuration Parameters
+
+These columns define the application context and the design parameters:
+
+* **Application\_Name**: The name of the application being analyzed.
+* **Version**: Identifier for a specific version or configuration of the application.
+* **Device**: The target FPGA device (e.g., `xczu7ev-ffvc1156-2-e`, `xcu200-fsgd2104-2-e`).
+* **Clock\_Period\_nsec**: The clock period for the design, in nanoseconds.
+
+### Applied Directives
+
+These fields indicate which design directives have been applied to specific action points within the kernel:
+
+* **Array\_1** to **Array\_22**: Represent directives applied to array-related action points (e.g., `complete_1`).
+* **OuterLoop\_1** to **OuterLoop\_26** and **InnerLoop\_1\_1** to **InnerLoop\_4\_2**: Capture loop-specific directives such as `pipeline_1` or `unroll_2`.
+
+### QoR Metrics
+
+* **Latency\_msec**: Kernel execution latency, measured in milliseconds.
+* **Synthesis\_Time\_sec**: Total time taken to synthesize the design, in seconds.
+* **BRAM\_Utilization\_percentage**, **DSP\_Utilization\_percentage**, **FF\_Utilization\_percentage**, **LUT\_Utilization\_percentage**: Resource usage reported as a percentage of the total available on the target FPGA device.
+* **Speedup**: Performance improvement factor compared to a baseline implementation.
+* **BRAMs**, **DSPs**, **FFs**, **LUTs**: Calculated absolute resource usage based on utilization percentage and the FPGA's total capacity.
+
+---
+
+This schema enables thorough exploration of the design-performance trade-offs across multiple configurations and devices.
+
+
 **Visualize Key Insights for an Application from the GNΩSIS Dataset**
 
 ```bash
-TODO
+python3.10 appAnalyzer.py --APPLICATION_NAME <ApplicationName>
+```
+
+**Example: Generate the Databases for RodiniaHLS KNN Tiling Application**
+
+```bash
+python3.10 appAnalyzer.py --APPLICATION_NAME rodinia-knn-1-tiling
 
 Output:
 
+Loaded GNΩSIS dataset:
+
+(227819, 93)
+                Application_Name         Version                Device  Clock_Period_nsec     Array_1     Array_2  ... LUT_Utilization_percentage Speedup BRAMs DSPs FFs LUTs
+0  rodinia_lc_gicov_0_baseline_0  workload_0.cpp  xczu7ev-ffvc1156-2-e               10.0  cyclic_2_2   block_8_2  ...                        101     NaN   NaN  NaN NaN  NaN
+1  rodinia_lc_gicov_0_baseline_0  workload_1.cpp  xczu7ev-ffvc1156-2-e               10.0   block_4_2  cyclic_4_2  ...                        101     NaN   NaN  NaN NaN  NaN
+2  rodinia_lc_gicov_0_baseline_0  workload_2.cpp  xczu7ev-ffvc1156-2-e               10.0   block_2_2   block_8_2  ...                        101     NaN   NaN  NaN NaN  NaN
+3  rodinia_lc_gicov_0_baseline_0  workload_3.cpp  xczu7ev-ffvc1156-2-e               10.0  complete_2  complete_2  ...                        101     NaN   NaN  NaN NaN  NaN
+4  rodinia_lc_gicov_0_baseline_0  workload_4.cpp  xczu7ev-ffvc1156-2-e               10.0  cyclic_4_2   block_2_2  ...                        101     NaN   NaN  NaN NaN  NaN
+
+[5 rows x 93 columns]
+
+Filtered dataset for application: rodinia-knn-1-tiling
+
+(4506, 93)
+            Application_Name         Version                Device  Clock_Period_nsec      Array_1  ...   Speedup BRAMs  DSPs      FFs     LUTs
+169560  rodinia-knn-1-tiling  workload_0.cpp  xczu7ev-ffvc1156-2-e               10.0  cyclic_16_1  ...  1.938975  18.0  17.0   4608.0   4608.0
+169561  rodinia-knn-1-tiling  workload_1.cpp  xczu7ev-ffvc1156-2-e               10.0    block_8_1  ...  8.105651  31.0  17.0   4608.0   6912.0
+169562  rodinia-knn-1-tiling  workload_2.cpp  xczu7ev-ffvc1156-2-e               10.0  block_128_1  ...  4.495155   6.0  17.0  73728.0  16128.0
+169563  rodinia-knn-1-tiling  workload_3.cpp  xczu7ev-ffvc1156-2-e               10.0    block_2_1  ...  2.081211   6.0  17.0   9216.0  16128.0
+169564  rodinia-knn-1-tiling  workload_4.cpp  xczu7ev-ffvc1156-2-e               10.0    block_8_1  ...  1.759654  18.0  17.0  36864.0  16128.0
+
+[5 rows x 93 columns]
+
+Analyzing Application: rodinia-knn-1-tiling
+
+
+Finished Application Analysis
 
 ```
+
+The output of this step is stored in the `output/rofdinia-knn-1-tiling` directory, which contains synthesizability and feasibility statistics. Designs that are both synthesizable and feasible are filtered, and the Pareto frontier is generated for each FPGA device and target clock frequency. These results are further visualized, as illustrated in the following figures.
+
+![Synthesizability & Feasibility Statistics](./output/rodinia-knn-1-tiling/synthesizability_feasibility_piecharts.pdf)
+![Quality of Result Metrics Distributions](./output/rodinia-knn-1-tiling/quality_of_result_metrics_boxplots.pdf)
+![Pareto Frontiers](./output/rodinia-knn-1-tiling/pareto_frontier_scatterplots.pdf)
+
 
 ## Publication
 

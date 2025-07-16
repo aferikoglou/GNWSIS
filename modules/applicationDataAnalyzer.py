@@ -1,6 +1,8 @@
 import os
 
 import pandas as pd
+pd.options.mode.chained_assignment = None
+
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -10,18 +12,18 @@ plt.rcParams['font.weight'] = 'bold'
 plt.rcParams['axes.titleweight'] = 'bold'
 
 class ApplicationDataAnalyzer():
-    def __init__(self, fname):
-        self.APPLICATION_NAME = fname.replace(".csv", "")
+    def __init__(self, application_name, df_app):
+        self.APPLICATION_NAME = application_name
+        self.df = df_app
 
-        self.APPLICATION_CSV_PATH = os.path.join("data", "CSVS", fname)
-        self.APPLICATION_OUTPUT_DIR = os.path.join("output", "Per_Application", self.APPLICATION_NAME)
+        self.APPLICATION_OUTPUT_DIR = os.path.join("output", self.APPLICATION_NAME)
         
         os.makedirs(self.APPLICATION_OUTPUT_DIR, exist_ok = True)
         
         self.AVAILABLE_DEVICES = ["xczu7ev-ffvc1156-2-e", "xcu200-fsgd2104-2-e"]
         self.AVAILABLE_TARGET_CLOCK_PERIODS = [10.0, 5.0, 3.33]
         
-        self.SEABORN_PALETTE = "bright"
+        self.SEABORN_PALETTE = "viridis"
         
         self.AVAILABLE_DEVICES_MAP = {"xczu7ev-ffvc1156-2-e": "ZCU104", "xcu200-fsgd2104-2-e": "U200"}
         self.AVAILABLE_TARGET_CLOCK_PERIODS_MAP = {10.0: "100MHz", 5.0: "200MHz", 3.33: "300MHz"}
@@ -89,7 +91,7 @@ class ApplicationDataAnalyzer():
                 }
 
                 # Append statistics and synthesizable-feasible designs
-                df_stats = df_stats.append(stats, ignore_index=True)
+                df_stats = pd.concat([df_stats, pd.DataFrame([stats])], ignore_index=True)
                 df_synth_feasible_designs = pd.concat([df_synth_feasible_designs, feasible_df], ignore_index=True)
 
         # Save the synthesizability and feasibility statistics to CSV
@@ -207,7 +209,7 @@ class ApplicationDataAnalyzer():
         # Set the Seaborn theme and color palette
         sns.set_theme()
         sns.set(style="ticks", color_codes=True)
-        palette = sns.color_palette(self.SEABORN_PALETTE)
+        palette = sns.color_palette(self.SEABORN_PALETTE, 2)
 
         # Mapping QoR metric names to their y-axis labels
         qor_metric_name_ylabel_map = {
@@ -300,7 +302,7 @@ class ApplicationDataAnalyzer():
         # Set the Seaborn theme and color palette
         sns.set_theme()
         sns.set(style="ticks", color_codes=True)
-        palette = sns.color_palette(self.SEABORN_PALETTE)
+        palette = sns.color_palette(self.SEABORN_PALETTE, 2)
 
         count = 0  # Counter to track subplot indices
 
@@ -318,7 +320,7 @@ class ApplicationDataAnalyzer():
                 df_pareto_frontier = current_df[pareto_mask]
                 
                 # Add 'Pareto_Optimal' column and assign scatter point size based on whether the design is Pareto-optimal
-                current_df["Pareto_Optimal"] = pareto_mask
+                current_df.loc[:, "Pareto_Optimal"] = pareto_mask
                 current_df["Scatter_Point_Size"] = current_df["Pareto_Optimal"].apply(lambda x: 75 if x else 20)
 
                 # Calculate the subplot indices using divmod (counter // 3 gives row, counter % 3 gives column)
@@ -379,13 +381,10 @@ class ApplicationDataAnalyzer():
             None
         """
         # Log the current application name
-        print(f"Analyzing Application: {self.APPLICATION_NAME}")
-        
-        # Load the application's data into a dataframe
-        df = pd.read_csv(self.APPLICATION_CSV_PATH)
-        
+        print(f"\nAnalyzing Application: {self.APPLICATION_NAME}\n")
+
         # Generate statistics on synthesizability and feasibility and save to CSV
-        self._get_synthesible_feasible_designs_and_statistics(df)
+        self._get_synthesible_feasible_designs_and_statistics(self.df)
         
         # Create and save pie charts based on the synthesizability and feasibility statistics
         self._plot_synthesizability_feasibility_statistics()
@@ -395,3 +394,5 @@ class ApplicationDataAnalyzer():
         
         # Get and visualize Pareto frontiers
         self._get_and_plot_pareto_frontiers()
+
+        print(f"\nFinished Application Analysis")
