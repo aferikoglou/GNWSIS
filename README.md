@@ -104,7 +104,7 @@ Certainly! Here's a professionally written **Markdown section** that explains th
 
 The GNΩSIS dataset is organized as a CSV file, where each row corresponds to a distinct hardware design configuration for a specific application, targeting a particular FPGA and clock frequency. It includes both configuration parameters and associated performance and resource utilization metrics.
 
-### Configuration Parameters
+#### Configuration Parameters
 
 These columns define the application context and the design parameters:
 
@@ -113,14 +113,14 @@ These columns define the application context and the design parameters:
 * **Device**: The target FPGA device (e.g., `xczu7ev-ffvc1156-2-e`, `xcu200-fsgd2104-2-e`).
 * **Clock\_Period\_nsec**: The clock period for the design, in nanoseconds.
 
-### Applied Directives
+####  Applied Directives
 
 These fields indicate which design directives have been applied to specific action points within the kernel:
 
 * **Array\_1** to **Array\_22**: Represent directives applied to array-related action points (e.g., `complete_1`).
 * **OuterLoop\_1** to **OuterLoop\_26** and **InnerLoop\_1\_1** to **InnerLoop\_4\_2**: Capture loop-specific directives such as `pipeline_1` or `unroll_2`.
 
-### QoR Metrics
+#### QoR Metrics
 
 * **Latency\_msec**: Kernel execution latency, measured in milliseconds.
 * **Synthesis\_Time\_sec**: Total time taken to synthesize the design, in seconds.
@@ -179,10 +179,9 @@ Finished Application Analysis
 
 The output of this step is stored in the `output/rofdinia-knn-1-tiling` directory, which contains synthesizability and feasibility statistics. Designs that are both synthesizable and feasible are filtered, and the Pareto frontier is generated for each FPGA device and target clock frequency. These results are further visualized, as illustrated in the following figures.
 
-![Synthesizability & Feasibility Statistics](./output/rodinia-knn-1-tiling/synthesizability_feasibility_piecharts.pdf)
-![Quality of Result Metrics Distributions](./output/rodinia-knn-1-tiling/quality_of_result_metrics_boxplots.pdf)
-![Pareto Frontiers](./output/rodinia-knn-1-tiling/pareto_frontier_scatterplots.pdf)
-
+![Synthesizability & Feasibility Statistics](./figures/synthesizability_feasibility_piecharts.pdf)
+![Quality of Result Metrics Distributions](./figures/quality_of_result_metrics_boxplots.pdf)
+![Pareto Frontiers](./figures/pareto_frontier_scatterplots.pdf)
 
 ## Publication
 
