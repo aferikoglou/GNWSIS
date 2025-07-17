@@ -97,10 +97,6 @@ GNΩSIS dataset generated successfully at GNΩSIS.csv
 
 > The exact CSV files referenced in the GNΩSIS manuscript are also available in the `data/` directory of this repository.
 
-Certainly! Here's a professionally written **Markdown section** that explains the **dataset schema** clearly and concisely:
-
----
-
 ## Dataset Schema
 
 The GNΩSIS dataset is organized as a CSV file, where each row corresponds to a distinct hardware design configuration for a specific application, targeting a particular FPGA and clock frequency. It includes both configuration parameters and associated performance and resource utilization metrics.
