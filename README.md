@@ -1,4 +1,4 @@
-# GNΩSIS: Lessons Learned in Generating a High-Level Synthesis Dataset
+# GNΩSIS: An extensible High-Level Synthesis Dataset
 
 This repository provides part of the source code used for the generation and analysis of the **GNΩSIS** dataset.
 
