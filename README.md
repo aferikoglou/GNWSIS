@@ -181,5 +181,11 @@ The output of this step is stored in the `output/rofdinia-knn-1-tiling` director
 If you find our project useful, please consider citing our paper:
 
 ```bash
-
+@article{ferikoglou2026gnomegasis,
+  title    = {GN$\Omega$SIS: Lessons Learned in Generating a High-Level Synthesis Dataset},
+  author   = {Ferikoglou, Aggelos and Tomkou, Despoina and Masouros, Dimosthenis and Soudris, Dimitrios and Xydis, Sotirios},
+  journal  = {ACM Transactions on Architecture and Code Optimization},
+  year     = {2026},
+  publisher= {ACM New York, NY}
+}
 ```
